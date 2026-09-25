@@ -1,0 +1,36 @@
+/* src/index.css */
+:root {
+  --bg-deep: #0b0c10;
+  --bg-card: #14161d;
+  --bg-sidebar: #0f1115;
+  --accent-purple: #7c3aed;
+  --accent-gold: #f59e0b;
+  --text-main: #f3f4f6;
+  --text-muted: #9ca3af;
+  --border-glow: rgba(124, 58, 237, 0.15);
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-deep);
+  color: var(--text-main);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  overflow: hidden;
+}
+
+/* Custom global scrollbar styling */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-deep);
+}
+::-webkit-scrollbar-thumb {
+  background: #222531;
+  border-radius: 10px;
+}
