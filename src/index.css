@@ -1,13 +1,13 @@
 /* src/index.css */
 :root {
-  --bg-deep: #0b0c10;
-  --bg-card: #14161d;
-  --bg-sidebar: #0f1115;
+  --bg-deep: #f8fafc;
+  --bg-card: #ffffff;
+  --bg-sidebar: #ffffff; /*  FORCES SIDEBAR WHITE */
   --accent-purple: #7c3aed;
   --accent-gold: #f59e0b;
-  --text-main: #f3f4f6;
-  --text-muted: #94a3b8; /* Brightened for high contrast */
-  --border-glow: rgba(124, 58, 237, 0.15);
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --border-light: #e2e8f0;
 }
 
 * {
@@ -23,16 +23,7 @@ body {
   overflow: hidden;
 }
 
-/* Override Bootstrap's dark text utilities to be clearly visible */
-.text-muted {
-  color: var(--text-muted) !important;
-}
-
-.text-secondary {
-  color: var(--text-muted) !important;
-}
-
-/* Custom global scrollbar styling */
+/* Custom crisp gray scrollbars */
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -40,6 +31,6 @@ body {
   background: var(--bg-deep);
 }
 ::-webkit-scrollbar-thumb {
-  background: #222531;
+  background: #cbd5e1;
   border-radius: 10px;
 }
