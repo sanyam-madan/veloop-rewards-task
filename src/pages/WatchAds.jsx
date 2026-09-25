@@ -1,6 +1,6 @@
 // src/pages/WatchAds.jsx
 import { useState } from 'react';
-import { Award, Calendar, Eye, ShieldAlert, Play, CheckCircle, Loader2, MonitorPlay } from 'lucide-react';
+import { Award, Calendar, Eye, ShieldAlert, Play, CheckCircle, Loader2, MonitorPlay, Flame, Gift, ArrowRight } from 'lucide-react';
 import styles from '../styles/WatchAds.module.css';
 import { availableAdsData, userInitialStats } from '../utils/mockData';
 
@@ -9,6 +9,13 @@ const WatchAds = () => {
   const [ads, setAds] = useState(availableAdsData);
   const [watchingAdId, setWatchingAdId] = useState(null);
   const [countdown, setCountdown] = useState(0);
+
+  // Dynamic state arrays for recent earnings history feeds
+  const [historyFeed, setHistoryFeed] = useState([
+    { title: 'FinVerse Pro', reward: 38 },
+    { title: 'StrideX', reward: 25 },
+    { title: 'DriveEZ', reward: 20 },
+  ]);
 
   const handleWatchAd = (adId, rewardAmount, duration) => {
     setWatchingAdId(adId);
@@ -30,13 +37,19 @@ const WatchAds = () => {
           setAds(prevAds => 
             prevAds.map(ad => ad.id === adId ? { ...ad, status: 'Completed' } : ad)
           );
+
+          // Prepend new completion into the live activity tracking panel
+          const targetedAd = ads.find(a => a.id === adId);
+          if (targetedAd) {
+            setHistoryFeed(prev => [{ title: targetedAd.title, reward: rewardAmount }, ...prev.slice(0, 3)]);
+          }
           
           setWatchingAdId(null);
           return 0;
         }
         return prev - 1;
       });
-    }, 1000); // CHANGED TO 1000ms for authentic 1-second ticks!
+    }, 1000);
   };
 
   const stats = [
@@ -48,6 +61,8 @@ const WatchAds = () => {
 
   const isGoalAchieved = userStats.todaysEarnings >= userStats.dailyGoal;
   const dailyProgressPercent = Math.min(100, (userStats.todaysEarnings / userStats.dailyGoal) * 100);
+
+  const weekDays = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
 
   return (
     <div className={styles.pageWrapper}>
@@ -172,8 +187,70 @@ const WatchAds = () => {
         })}
       </div>
 
+      {/* FINAL REQUIRED SIDEBAR WIDGET PANELS ROW */}
+      <div className={styles.widgetsContainer}>
+        {/* Widget 1: Daily Streak */}
+        <div className={styles.widgetCard}>
+          <div className="d-flex justify-content-between align-items-center mb-3">
+            <h5 className={styles.widgetTitle + " m-0"}>
+              <Flame size={18} className="text-danger me-2 inline-block align-middle" fill="currentColor" />
+              Daily Streak
+            </h5>
+            <span className="badge bg-danger bg-opacity-10 text-danger px-2.5 py-1 rounded">7 Days</span>
+          </div>
+          <p className="text-muted small mb-3">Keep it up! Watch ads daily to claim a mystery box reward.</p>
+          <div className={styles.streakGrid}>
+            {weekDays.map((day, idx) => (
+              <div key={idx} className={styles.streakDay}>
+                <span className={styles.dayBubble + " " + styles.dayBubbleActive}>{day}</span>
+              </div>
+            ))}
+          </div>
+          <div className="d-flex align-items-center gap-3 mt-3 p-2.5 rounded bg-dark bg-opacity-40 border border-secondary border-opacity-10">
+            <Gift size={28} className="text-warning flex-shrink-0" />
+            <span className="small text-muted" style={{ fontSize: '0.75rem' }}>Next mystery reward unlocks in 24 hours!</span>
+          </div>
+        </div>
+
+               {/* Widget 2: Recent Earnings */}
+        <div className={styles.widgetCard}>
+          <div className="d-flex justify-content-between align-items-center mb-3">
+            <h5 className={styles.widgetTitle + " m-0"}>Recent Earnings</h5>
+            <a href="#" className="text-primary small text-decoration-none d-flex align-items-center gap-1">
+              View all <ArrowRight size={12} />
+            </a>
+          </div>
+          
+          <div className={styles.historyFeed}>
+            {historyFeed.map((item, idx) => (
+              <div key={idx} className={styles.historyItem}>
+                <span className="small text-white fw-medium">{item.title}</span>
+                <span className="small text-success fw-bold">+{item.reward} VEs</span>
+              </div>
+            ))}
+          </div>
+        </div>
+
+
+      {/* Widget 3: Weekly Progress Custom Chart */}
+      <div className={styles.widgetCard}>
+        <h5 className={styles.widgetTitle}>Weekly Earnings</h5>
+        <div className={styles.chartContainer}>
+          {userStats.weeklyProgress.map((prog, idx) => {
+            const calculatedHeight = Math.min(100, (prog.ves / 300) * 100);
+            return (
+              <div key={idx} className={styles.chartColumnWrapper}>
+                <div className={styles.chartBar} style={{ height: `${calculatedHeight}px` }}></div>
+                <span className={styles.dayLabel}>{prog.day}</span>
+              </div>
+            );
+          })}
+        </div>
+      </div>
     </div>
-  );
+
+  </div>
+);
 };
 
 export default WatchAds;
