@@ -1,9 +1,10 @@
 // src/pages/WatchAds.jsx
 
 import heroGraphicImg from '../assets/hero-graphic.png';
+import { Award, Calendar, Eye, ShieldAlert, Play, CheckCircle, Loader2, Flame, Gift, ArrowRight, ShieldCheck, Bell } from 'lucide-react';
+
 
 import { useState } from 'react';
-import { Award, Calendar, Eye, ShieldAlert, Play, CheckCircle, Loader2, Flame, Gift, ArrowRight, ShieldCheck } from 'lucide-react';
 import styles from '../styles/WatchAds.module.css';
 import { availableAdsData, userInitialStats } from '../utils/mockdata.js';
 
@@ -97,16 +98,27 @@ const WatchAds = () => {
 
   return (
     <div className={styles.pageWrapper}>
-      {/* Top Navbar Row */}
+         {/* Top Navbar Row */}
       <div className={styles.headerContainer}>
         <div>
           <h2 className="fw-bold m-0 text-dark" style={{ letterSpacing: '-0.5px' }}>Watch Ads</h2>
           <small className="text-muted">Watch ads and earn VEs</small>
         </div>
+        
+        {/* RIGHT FLEX CONTAINER: Houses token badge, new bell icon, and initials avatar */}
+          
+          {/* 🚀 NEW BELL NOTIFICATION ICON WITH REFINED LIGHT-THEME MOCK ACCENTS */}
         <div className="d-flex align-items-center gap-3">
+          <button 
+            className="btn p-2 rounded-circle border d-flex align-items-center justify-content-center bg-white text-muted hover-bg-light transition-all"
+            style={{ width: '40px', height: '40px', borderColor: 'var(--border-light)' }}
+          >
+            <Bell size={18} className="text-secondary" />
+          </button>
           <span className="badge bg-warning text-dark px-3 py-2 fs-6 rounded-pill fw-bold shadow-sm">
             {userStats.totalVes.toLocaleString()} VEs
           </span>
+
           <div className="bg-light text-dark rounded-circle d-flex align-items-center justify-content-center fw-bold border" style={{ width: '40px', height: '40px' }}>
             SM
           </div>
