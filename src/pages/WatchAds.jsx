@@ -62,7 +62,18 @@ const WatchAds = () => {
   const isGoalAchieved = userStats.todaysEarnings >= userStats.dailyGoal;
   const dailyProgressPercent = Math.min(100, (userStats.todaysEarnings / userStats.dailyGoal) * 100);
 
-  const weekDays = ['M', 'T', 'W', 'T', 'F', 'S', 'S'];
+  const weekDays = [
+    { label: 'M', dayIndex: 1 },
+    { label: 'T', dayIndex: 2 },
+    { label: 'W', dayIndex: 3 },
+    { label: 'T', dayIndex: 4 },
+    { label: 'F', dayIndex: 5 },
+    { label: 'S', dayIndex: 6 },
+    { label: 'S', dayIndex: 0 }
+  ];
+
+  // Fetch the real live calendar metric day index right now
+  const currentDayIndex = new Date().getDay();
 
   return (
     <div className={styles.pageWrapper}>
@@ -145,44 +156,53 @@ const WatchAds = () => {
 
           return (
             <div key={ad.id} className={styles.adCard}>
-              <div className={styles.adImageWrapper}>
-                <span className={styles.categoryBadge}>{ad.category}</span>
-                <MonitorPlay size={32} className="text-secondary opacity-20" />
-              </div>
-              
-              <div className={styles.adBody}>
-                <h5 className={styles.adTitle}>{ad.title}</h5>
-                <p className={styles.adDesc}>{ad.description}</p>
-                
-                <div className={styles.adMeta}>
-                  <span>🕒 {ad.duration} sec</span>
-                  <span className={styles.rewardText}>+{ad.reward} VEs</span>
-                </div>
+  {/* UPDATE ONLY THIS IMAGE WRAPPER BLOCK: */}
+  <div className={styles.adImageWrapper}>
+    <span className={styles.categoryBadge}>{ad.category}</span>
+    <div className={styles.adGraphicCircle}>
+      <MonitorPlay 
+        size={24} 
+        className={ad.category === 'Limited Time Bonus' ? 'text-warning' : 'text-primary'} 
+        style={{ zIndex: 1, position: 'relative' }} 
+      />
+    </div>
+  </div>
+  
+  {/* LEAVE EVERYTHING BELOW THIS LINE EXACTLY AS IT IS IN YOUR FILE: */}
+  <div className={styles.adBody}>
+    <h5 className={styles.adTitle}>{ad.title}</h5>
+    <p className={styles.adDesc}>{ad.description}</p>
+    
+    <div className={styles.adMeta}>
+      <span>🕒 {ad.duration} sec</span>
+      <span className={styles.rewardText}>+{ad.reward} VEs</span>
+    </div>
 
-                <button 
-                  className={styles.adButton}
-                  onClick={() => handleWatchAd(ad.id, ad.reward, ad.duration)}
-                  disabled={isCompleted || (isAnyAdWatching && !isThisAdWatching)}
-                >
-                  {isThisAdWatching ? (
-                    <>
-                      <Loader2 size={16} className="spinner-border-sm animate-spin" />
-                      <span>Watching ({countdown}s)</span>
-                    </>
-                  ) : isCompleted ? (
-                    <>
-                      <CheckCircle size={16} />
-                      <span>Completed</span>
-                    </>
-                  ) : (
-                    <>
-                      <Play size={16} fill="currentColor" />
-                      <span>Watch Advertisement</span>
-                    </>
-                  )}
-                </button>
-              </div>
-            </div>
+    <button 
+      className={styles.adButton}
+      onClick={() => handleWatchAd(ad.id, ad.reward, ad.duration)}
+      disabled={isCompleted || (isAnyAdWatching && !isThisAdWatching)}
+    >
+      {isThisAdWatching ? (
+        <>
+          <Loader2 size={16} className="spinner-border-sm animate-spin" />
+          <span>Watching ({countdown}s)</span>
+        </>
+      ) : isCompleted ? (
+        <>
+          <CheckCircle size={16} />
+          <span>Completed</span>
+        </>
+      ) : (
+        <>
+          <Play size={16} fill="currentColor" />
+          <span>Watch Advertisement</span>
+        </>
+      )}
+    </button>
+  </div>
+</div>
+
           );
         })}
       </div>
@@ -199,12 +219,18 @@ const WatchAds = () => {
             <span className="badge bg-danger bg-opacity-10 text-danger px-2.5 py-1 rounded">7 Days</span>
           </div>
           <p className="text-muted small mb-3">Keep it up! Watch ads daily to claim a mystery box reward.</p>
-          <div className={styles.streakGrid}>
-            {weekDays.map((day, idx) => (
-              <div key={idx} className={styles.streakDay}>
-                <span className={styles.dayBubble + " " + styles.dayBubbleActive}>{day}</span>
-              </div>
-            ))}
+         <div className={styles.streakGrid}>
+            {weekDays.map((day, idx) => {
+              // Highlight the bubble if the active index matches today's real day
+              const isToday = day.dayIndex === currentDayIndex;
+              return (
+                <div key={idx} className={styles.streakDay}>
+                  <span className={`${styles.dayBubble} ${isToday ? styles.dayBubbleActive : ''}`}>
+                    {day.label}
+                  </span>
+                </div>
+              );
+            })}
           </div>
           <div className="d-flex align-items-center gap-3 mt-3 p-2.5 rounded bg-dark bg-opacity-40 border border-secondary border-opacity-10">
             <Gift size={28} className="text-warning flex-shrink-0" />
@@ -248,6 +274,66 @@ const WatchAds = () => {
         </div>
       </div>
     </div>
+     <div className={styles.howItWorksCard}>
+        <h5 className={styles.widgetTitle + " mb-4"}>How It Works</h5>
+        
+        <div className="d-flex flex-column flex-lg-row align-items-stretch align-items-lg-center justify-content-between gap-4">
+          
+          {/* Step 1 */}
+          <div className={styles.stepItem}>
+            <div className={styles.stepNumber} style={{ backgroundColor: 'rgba(124, 58, 237, 0.15)', color: '#a78bfa' }}>1</div>
+            <div className={styles.stepContent}>
+              <h6>Watch</h6>
+              <p>Watch short ads and complete the timer.</p>
+            </div>
+            <div className={styles.stepVisual} style={{ backgroundColor: 'rgba(124, 58, 237, 0.1)', color: '#7c3aed' }}>
+              <Play size={16} fill="currentColor" />
+            </div>
+          </div>
+
+          <div className={styles.arrowIcon + " d-none d-lg-block"}><ArrowRight size={18} /></div>
+
+          {/* Step 2 */}
+          <div className={styles.stepItem}>
+            <div className={styles.stepNumber} style={{ backgroundColor: 'rgba(245, 158, 11, 0.15)', color: '#fbbf24' }}>2</div>
+            <div className={styles.stepContent}>
+              <h6>Earn</h6>
+              <p>Earn VEs instantly after completing the ad.</p>
+            </div>
+            <div className={styles.stepVisual} style={{ backgroundColor: 'rgba(245, 158, 11, 0.1)', color: '#f59e0b', fontSize: '0.75rem', fontWeight: '800' }}>
+              VE
+            </div>
+          </div>
+
+          <div className={styles.arrowIcon + " d-none d-lg-block"}><ArrowRight size={18} /></div>
+
+          {/* Step 3 */}
+          <div className={styles.stepItem}>
+            <div className={styles.stepNumber} style={{ backgroundColor: 'rgba(16, 185, 129, 0.15)', color: '#34d399' }}>3</div>
+            <div className={styles.stepContent}>
+              <h6>Withdraw</h6>
+              <p>Convert your VEs to real cash and withdraw to your bank.</p>
+            </div>
+            <div className={styles.stepVisual} style={{ backgroundColor: 'rgba(16, 185, 129, 0.1)', color: '#10b981' }}>
+              <Award size={18} />
+            </div>
+          </div>
+
+          <div className="ms-lg-4 d-flex align-items-center">
+            <button className={styles.walletBtn}>
+              View My Wallet <ArrowRight size={14} className="ms-1 inline" />
+            </button>
+          </div>
+
+        </div>
+      </div>
+
+      {/* FOOTER SECTION */}
+      <div className={styles.footerContainer}>
+        <p className="text-muted small m-0" style={{ fontSize: '0.75rem' }}>
+          &copy; 2026 VELOOP Rewards. All rights reserved.
+        </p>
+      </div>
 
   </div>
 );

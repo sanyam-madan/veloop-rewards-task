@@ -6,7 +6,7 @@
   --accent-purple: #7c3aed;
   --accent-gold: #f59e0b;
   --text-main: #f3f4f6;
-  --text-muted: #9ca3af;
+  --text-muted: #94a3b8; /* Brightened for high contrast */
   --border-glow: rgba(124, 58, 237, 0.15);
 }
 
@@ -21,6 +21,15 @@ body {
   color: var(--text-main);
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   overflow: hidden;
+}
+
+/* Override Bootstrap's dark text utilities to be clearly visible */
+.text-muted {
+  color: var(--text-muted) !important;
+}
+
+.text-secondary {
+  color: var(--text-muted) !important;
 }
 
 /* Custom global scrollbar styling */

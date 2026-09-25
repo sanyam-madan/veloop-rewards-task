@@ -24,7 +24,7 @@ const Sidebar = () => {
   ];
 
   return (
-    <aside className="p-3 bg-dark text-white vh-100 border-end border-secondary" style={{ width: '260px' }}>
+    <aside className="p-3 bg-dark text-white vh-100 border-end border-secondary flex-shrink-0" style={{ width: '260px' }}>
       <div className="d-flex align-items-center mb-4 px-2">
         <span className="fw-bold fs-4 text-warning">VELOOP</span>
       </div>
