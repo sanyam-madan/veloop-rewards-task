@@ -4,7 +4,7 @@ import lifetimeImg from '../assets/lifetime-stat.png';
 import watchedImg from '../assets/watched-stat.png';
 import remainingImg from '../assets/remaining-stat.png';
 import heroGraphicImg from '../assets/hero-graphic.png';
-import { Award, Calendar, Eye, ShieldAlert, Play, CheckCircle, Loader2, Flame, Gift, ArrowRight, ShieldCheck, Bell } from 'lucide-react';
+import { Award, Calendar, Eye, ShieldAlert, Play, CheckCircle, Loader2, Flame, Gift, ArrowRight, ShieldCheck, Bell,MonitorPlay } from 'lucide-react';
 
 
 import { useState } from 'react';
@@ -25,12 +25,12 @@ const WatchAds = () => {
 
     // Clean vector image links matching the exact categories in the mockup
     const mockImages = {
-        1: "https://unsplash.com", // Fintech vector feel
-        2: "https://unsplash.com", // StrideX Shoe image matching mock
-        3: "https://unsplash.com", // Headphones matching mock
-        4: "https://unsplash.com", // Car ride-share mock
-        5: "https://unsplash.com", // Security shield mock
-        6: "https://unsplash.com"  // Gift retail box mock
+        1: <MonitorPlay size={40} className="text-primary" />,
+        2: <Flame size={40} className="text-success" />,
+        3: <Award size={40} className="text-warning" />,
+        4: <Calendar size={40} className="text-info" />,
+        5: <ShieldCheck size={40} className="text-primary" />,
+        6: <Gift size={40} className="text-danger" />
     };
 
     // 🚀 FIXED: Added an explicit execution lock to stop double reward triggers
@@ -241,56 +241,88 @@ const WatchAds = () => {
                 <span className="text-muted small">{ads.filter(a => a.status === 'Available').length} Ads Available</span>
             </div>
 
-            <div className={styles.adsCardGrid}>
-                {ads.map((ad) => {
-                    const isThisAdWatching = watchingAdId === ad.id;
-                    const isAnyAdWatching = watchingAdId !== null;
-                    const isCompleted = ad.status === 'Completed';
+           <div className={styles.adsCardGrid}>
+        {ads.map((ad) => {
+          const isThisAdWatching = watchingAdId === ad.id;
+          const isAnyAdWatching = watchingAdId !== null;
+          const isCompleted = ad.status === 'Completed';
 
-                    return (
-                        <div key={ad.id} className={styles.adCard}>
-                            <div className={styles.adImageWrapper}>
-                                <span className={styles.categoryBadge}>{ad.category}</span>
-                                <img src={mockImages[ad.id]} alt="" className={styles.adImage} />
-                            </div>
+          return (
+            <div key={ad.id} className={styles.adCard}>
+              
+              {/* UPPER WRAPPER ROW SECTION: Arranges Image Left, Info Right */}
+              <div className="d-flex p-3 gap-3 flex-grow-1 align-items-center">
+                
+               {/* COLUMN 1: Square layout container rendering your dynamic icon graphics */}
+                <div className={styles.adImageWrapper + " d-flex align-items-center justify-content-center"} style={{ backgroundColor: '#f1f5f9' }}>
+                  <span className={styles.categoryBadge}>{ad.category}</span>
+                  
+                  {/* Renders the vector icon directly on the screen */}
+                  {mockImages[ad.id]}
+                </div>
+                
+                {/* COLUMN 2: Descriptive Info Stack (Title, Desc, Time, VEs) */}
+                <div className="d-flex flex-column flex-grow-1" style={{ minWidth: 0 }}>
+                  <h5 className={styles.adTitle + " text-truncate m-0"}>{ad.title}</h5>
+                  <p className={styles.adDesc + " text-muted text-clamp-2 my-1"}>{ad.description}</p>
+                  
+                  <div className="d-flex justify-content-between align-items-center mt-auto" style={{ fontSize: '0.78rem' }}>
+                    <span className="text-muted">🕒 {ad.duration} sec</span>
+                    <span className={styles.rewardText}>+{ad.reward} VEs</span>
+                  </div>
+                  
+                  {/* Dynamic Status Indicator */}
+                  <div className="mt-1 d-flex align-items-center gap-1" style={{ fontSize: '0.72rem' }}>
+                    <span 
+                      className="rounded-circle" 
+                      style={{ 
+                        width: '6px', 
+                        height: '6px', 
+                        backgroundColor: isCompleted ? '#64748b' : '#10b981',
+                        display: 'inline-block' 
+                      }}
+                    ></span>
+                    <span className="text-muted">{isCompleted ? 'Completed' : '● Available'}</span>
+                  </div>
+                </div>
 
-                            <div className={styles.adBody}>
-                                <h5 className={styles.adTitle}>{ad.title}</h5>
-                                <p className={styles.adDesc}>{ad.description}</p>
+              </div>
 
-                                <div className={styles.adMeta}>
-                                    <span className="small text-muted">🕒 {ad.duration} sec</span>
-                                    <span className={styles.rewardText}>+{ad.reward} VEs</span>
-                                </div>
+              {/* LOWER WORKSPACE ROW SECTION: The Full-Width Bottom Interactive Button Container */}
+              <div className="p-2 border-top bg-light bg-opacity-20 mt-auto">
+                <button 
+                  className={styles.adButton}
+                  onClick={() => handleWatchAd(ad.id, ad.reward, ad.duration)}
+                  disabled={isCompleted || (isAnyAdWatching && !isThisAdWatching)}
+                  style={{ 
+                    backgroundColor: isCompleted ? '#f1f5f9' : isThisAdWatching ? '#7c3aed' : '#ffffff',
+                    border: '1px solid #7c3aed',
+                    color: isCompleted ? '#94a3b8' : isThisAdWatching ? '#ffffff' : '#7c3aed'
+                  }}
+                >
+                  {isThisAdWatching ? (
+                    <>
+                      <Loader2 size={14} className="spinner-border-sm animate-spin" />
+                      <span>Watching ({countdown}s)</span>
+                    </>
+                  ) : isCompleted ? (
+                    <>
+                      <CheckCircle size={14} className="text-muted" />
+                      <span>Completed</span>
+                    </>
+                  ) : (
+                    <>
+                      <Play size={14} fill="currentColor" />
+                      <span>Watch Advertisement</span>
+                    </>
+                  )}
+                </button>
+              </div>
 
-                                <button
-                                    className={styles.adButton}
-                                    onClick={() => handleWatchAd(ad.id, ad.reward, ad.duration)}
-                                    disabled={isCompleted || (isAnyAdWatching && !isThisAdWatching)}
-                                    style={{ backgroundColor: isCompleted ? '#f1f5f9' : '#7c3aed' }}
-                                >
-                                    {isThisAdWatching ? (
-                                        <>
-                                            <Loader2 size={14} className="spinner-border-sm animate-spin" />
-                                            <span>Watching ({countdown}s)</span>
-                                        </>
-                                    ) : isCompleted ? (
-                                        <>
-                                            <CheckCircle size={14} className="text-muted" />
-                                            <span className="text-muted">Completed</span>
-                                        </>
-                                    ) : (
-                                        <>
-                                            <Play size={14} fill="currentColor" />
-                                            <span>Watch Advertisement</span>
-                                        </>
-                                    )}
-                                </button>
-                            </div>
-                        </div>
-                    );
-                })}
             </div>
+          );
+        })}
+      </div>
 
             {/* SIDEBAR WIDGET PANELS ROW */}
             <div className={styles.widgetsContainer}>
