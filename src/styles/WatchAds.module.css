@@ -431,7 +431,19 @@
     height: 180px;     /* Set to comfortably match your graphic scale */
     background: transparent !important; /* Forces the container to be perfectly invisible */
     overflow: visible;
+    
     margin-left: 2rem;
     flex-shrink: 0;
+  }
+}
+@media (max-width: 767px) {
+  .pageWrapper {
+    padding: 1rem !important;
+    width: 100vw;
+    height: 100vh;
+  }
+  
+  .headerContainer {
+    margin-bottom: 1rem !important;
   }
 }
