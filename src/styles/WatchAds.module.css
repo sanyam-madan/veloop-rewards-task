@@ -3,10 +3,15 @@
   flex-grow: 1;
   height: 100vh;
   background-color: var(--bg-deep);
-  padding: 1.5rem 2.5rem 2.5rem 2.5rem;
+  /*  Reduces horizontal padding on small screens for comfortable viewing */
+  padding: 1.5rem 1rem 2.5rem 1rem; 
   overflow-y: auto;
 }
-
+@media (min-width: 768px) {
+  .pageWrapper {
+    padding: 1.5rem 2.5rem 2.5rem 2.5rem;
+  }
+}
 .headerContainer {
   display: flex;
   justify-content: space-between;
@@ -14,18 +19,28 @@
   margin-bottom: 1.5rem;
 }
 
-/* Elegant Light Gradient Hero Section */
 .heroBanner {
-  background: linear-gradient(135deg, #f3e8ff 0%, #fae8ff 100%);
-   border: 1px solid #ebdfff; 
+  background-color: #f6eeff; 
+  border: 1px solid #ebdfff; 
   border-radius: 24px;
-  padding: 2.5rem;
+  padding: 1.5rem; /* Reduced slightly for compact mobile screens */
   display: flex;
+  /* 🚀 FIXED: Vertical stack on mobile devices, horizontal row on laptops */
+  flex-direction: column; 
+  gap: 1.5rem;
   justify-content: space-between;
-  align-items: center;
+  align-items: stretch;
   margin-bottom: 1.5rem;
   position: relative;
-   box-shadow: 0 4px 12px rgba(124, 58, 237, 1); 
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.03);
+  overflow: visible;
+}
+@media (min-width: 768px) {
+  .heroBanner {
+    padding: 2.5rem;
+    flex-direction: row;
+    align-items: center;
+  }
 }
 
 .heroText h1 {

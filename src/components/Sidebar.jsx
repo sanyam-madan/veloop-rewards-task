@@ -23,13 +23,13 @@ const Sidebar = () => {
 
   return (
     <aside 
-      className="p-3 border-end flex-shrink-0 d-flex flex-column h-100" 
-      style={{ 
-        width: '260px', 
-        backgroundColor: 'var(--bg-sidebar)', 
-        borderColor: 'var(--border-light)' 
-      }}
-    >
+  className="p-3 border-end flex-shrink-0 d-none d-md-flex flex-column h-100" 
+  style={{ 
+    width: '260px', 
+    backgroundColor: 'var(--bg-sidebar)', 
+    borderColor: 'var(--border-light)' 
+  }}
+>
       {/* Brand Branding Section */}
       <div className="d-flex align-items-center mb-4 mt-2 px-2">
         <span className="fw-bold fs-4" style={{ color: '#7c3aed', letterSpacing: '-0.5px' }}>VELOOP</span>

@@ -1,15 +1,14 @@
-// src/App.jsx
-import React from 'react';
 import Sidebar from './components/Sidebar';
 import WatchAds from './pages/WatchAds';
 
 function App() {
   return (
-    <div className="d-flex vh-100 overflow-hidden bg-dark">
-      {/* Fixed Left Navigation Sidebar */}
+    /* 🚀 FIXED: Changes from horizontal row to a vertical stack on mobile screens automatically */
+    <div className="d-flex flex-column flex-md-row vh-100 overflow-hidden bg-light">
+      {/* Left Navigation Sidebar */}
       <Sidebar />
       
-      {/* Right Column Workspace */}
+      {/* Right Main Dashboard Workspace Container */}
       <WatchAds />
     </div>
   );
