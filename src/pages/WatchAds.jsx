@@ -19,8 +19,8 @@ const WatchAds = ({ toggleSidebar })=> {
 
     const [historyFeed, setHistoryFeed] = useState([
         { title: 'FinVerse Pro', reward: 38 },
-        { title: 'StrideX', reward: 25 },
-        { title: 'DriveEZ', reward: 20 },
+        { title: 'StrideX', reward: 54},
+        { title: 'DriveEZ', reward: 49 },
     ]);
 
     // Clean vector image links matching the exact categories in the mockup
@@ -434,7 +434,7 @@ const WatchAds = ({ toggleSidebar })=> {
             {/* FOOTER SECTION */}
             <div className={styles.footerContainer}>
                 <p className="text-muted small m-0" style={{ fontSize: '0.72rem' }}>
-                    &copy; 2025 VELOOP Rewards. All rights reserved.
+                    &copy; 2026 VELOOP Rewards. All rights reserved.
                 </p>
             </div>
 

@@ -14,7 +14,7 @@ import {
 const Sidebar = ({ isOpen, toggleSidebar }) => {
   const menuItems = [
     { icon: <LayoutDashboard size={18} />, label: 'Dashboard' },
-    { icon: <PlaySquare size={18} />, label: 'Watch Ads', active: true },
+    { icon: <PlaySquare size={18} />, label: 'Watch Videos', active: true },
     { icon: <Award size={18} />, label: 'Rewards' },
     { icon: <Wallet size={18} />, label: 'Wallet' },
     { icon: <History size={18} />, label: 'History' },
