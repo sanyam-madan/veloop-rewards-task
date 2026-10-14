@@ -1,0 +1,449 @@
+/* src/styles/WatchAds.module.css */
+.pageWrapper {
+  flex-grow: 1;
+  height: 100vh;
+  background-color: var(--bg-deep);
+  /*  Reduces horizontal padding on small screens for comfortable viewing */
+  padding: 1.5rem 1rem 2.5rem 1rem; 
+  overflow-y: auto;
+}
+@media (min-width: 768px) {
+  .pageWrapper {
+    padding: 1.5rem 2.5rem 2.5rem 2.5rem;
+  }
+}
+.headerContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.heroBanner {
+  background-color: #f6eeff; 
+  border: 1px solid #ebdfff; 
+  border-radius: 24px;
+  padding: 1.5rem; /* Reduced slightly for compact mobile screens */
+  display: flex;
+  /* 🚀 FIXED: Vertical stack on mobile devices, horizontal row on laptops */
+  flex-direction: column; 
+  gap: 1.5rem;
+  justify-content: space-between;
+  align-items: stretch;
+  margin-bottom: 1.5rem;
+  position: relative;
+  box-shadow: 0 4px 12px rgba(124, 58, 237, 0.03);
+  overflow: visible;
+}
+@media (min-width: 768px) {
+  .heroBanner {
+    padding: 2.5rem;
+    flex-direction: row;
+    align-items: center;
+  }
+}
+
+.heroText h1 {
+  font-size: 2.2rem;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+  margin-bottom: 0.5rem;
+  color: #1e1b4b;
+}
+
+.heroSubtitle {
+  color: #4b5563;
+  font-size: 0.95rem;
+  max-width: 500px;
+  line-height: 1.5;
+  margin-bottom: 1.5rem;
+}
+
+.progressContainer {
+  background: #ffffff;
+  border: 1px solid #f3e8ff;
+  padding: 1rem;
+  border-radius: 16px;
+  max-width: 425px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.02);
+}
+
+/* Stats Row */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 1.5rem;
+}
+
+.statCard {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: 16px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+  transition: transform 0.2s ease;
+}
+
+.statCard:hover {
+  transform: translateY(-2px);
+}
+
+.statHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 0.5rem;
+}
+
+.statLabel {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.statIconBox {
+  background: #f8fafc;
+  border: 1px solid var(--border-light);
+  padding: 0.4rem;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.statValue {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.5px;
+}
+
+.statTrend {
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+/* Middle Informational Callout Bar */
+.infoAlertBar {
+  background-color: #f0fdf4;
+  border: 1px solid #bbf7d0;
+  border-radius: 12px;
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: justify;
+  margin-bottom: 1.5rem;
+}
+
+/* Available Ads Grid */
+.adsGridHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+}
+
+.adsCardGrid {
+  display: grid;
+  /* Expands widths to handle row shapes cleanly */
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); 
+  gap: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.adCard {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  min-height: 190px;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+}
+
+
+.adCard:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.04);
+}
+.adImageWrapper {
+  width: 100px;
+  height: 100px;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  flex-shrink: 0;
+  background-color: #f1f5f9;
+}
+
+.adImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+.categoryBadge {
+  position: absolute;
+  top: 6px;
+  left: 6px;
+  background: rgba(255, 255, 255, 0.95);
+  color: var(--accent-purple);
+  font-size: 0.62rem;
+  font-weight: 800;
+  padding: 2px 6px;
+  border-radius: 4px;
+  border: 1px solid rgba(124, 58, 237, 0.1);
+  z-index: 5;
+}
+.adBody {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+
+.adTitle {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+.adDesc {
+  font-size: 0.76rem;
+  line-height: 1.3;
+  margin: 0;
+  /* Multi-line ellipsis clamp fallback configuration */
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.adMeta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+
+.rewardText {
+  color: var(--accent-purple);
+  font-weight: 700;
+}
+.adButton {
+  width: 100%;
+  border: none;
+  padding: 0.55rem;
+  border-radius: 10px;
+  font-weight: 700;
+  font-size: 0.82rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+}
+.adButton:hover:not(:disabled) {
+  background: #6d28d9;
+}
+
+.adButton:disabled {
+  background: #f1f5f9;
+  color: #94a3b8;
+  cursor: not-allowed;
+}
+
+/* Widgets Container */
+.widgetsContainer {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.widgetCard {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: 16px;
+  padding: 1.25rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
+}
+
+.widgetTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-main);
+  margin-bottom: 1rem;
+}
+
+.streakGrid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 0.4rem;
+}
+
+.streakDay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dayBubble {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  background: #f8fafc;
+  border: 1px solid var(--border-light);
+  color: var(--text-muted);
+}
+
+.dayBubbleActive {
+  background: #fee2e2;
+  border-color: #fca5a5;
+  color: #ef4444;
+}
+
+.historyFeed {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.historyItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem 0.75rem;
+  background: #f8fafc;
+  border: 1px solid var(--border-light);
+  border-radius: 8px;
+}
+
+.chartContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  height: 100px;
+}
+
+.chartColumnWrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-grow: 1;
+}
+
+.chartBar {
+  width: 14px;
+  background: #ddd6fe;
+  border-radius: 4px 4px 0 0;
+}
+
+.dayLabel {
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  margin-top: 0.4rem;
+}
+
+.howItWorksCard {
+  background-color: var(--bg-card);
+  border: 1px solid var(--border-light);
+  border-radius: 16px;
+  padding: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.stepItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+}
+
+.stepNumber {
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  font-weight: 700;
+  flex-shrink: 0;
+}
+
+.stepContent h6 {
+  margin: 0;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.stepContent p {
+  margin: 0;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+.walletBtn {
+  background: #ffffff;
+  border: 1px solid var(--border-light);
+  color: var(--text-main);
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  transition: background 0.2s ease;
+}
+
+.walletBtn:hover {
+  background: #f8fafc;
+}
+
+.footerContainer {
+  border-top: 1px solid var(--border-light);
+  padding-top: 1rem;
+  margin-bottom: 0.5rem;
+}
+.heroGraphicWrapper {
+  display: none;
+}
+
+@media (min-width: 768px) {
+  .heroGraphicWrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    width: 280px;      /* Set to comfortably match your graphic scale */
+    height: 180px;     /* Set to comfortably match your graphic scale */
+    background: transparent !important; /* Forces the container to be perfectly invisible */
+    overflow: visible;
+    
+    margin-left: 2rem;
+    flex-shrink: 0;
+  }
+}
+@media (max-width: 767px) {
+  .pageWrapper {
+    padding: 1rem !important;
+    width: 100vw;
+    height: 100vh;
+  }
+  
+  .headerContainer {
+    margin-bottom: 1rem !important;
+  }
+}
