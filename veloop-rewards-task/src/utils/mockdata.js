@@ -44,7 +44,7 @@ export const availableAdsData = [
     duration: 60,
     reward: 81,
     status: 'Available',
-    category: 'Limited Time Bonus',
+    category: 'Sponsored',
     imageUrl: 'https://unsplash.com'
   },
   {

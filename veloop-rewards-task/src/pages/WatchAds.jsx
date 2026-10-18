@@ -10,6 +10,13 @@ import { Award, Calendar, Eye, ShieldAlert, Play, CheckCircle, Loader2, Flame, G
 import { useState } from 'react';
 import styles from '../styles/WatchAds.module.css';
 import { availableAdsData, userInitialStats } from '../utils/mockdata.js';
+ import ad1 from '/src/assets/ad1.png';
+import ad2 from '/src/assets/ad2.png';
+import ad3 from '/src/assets/ad3.png';
+import ad4 from '/src/assets/ad4.png';
+import ad5 from '/src/assets/ad5.png';
+import ad6 from '/src/assets/ad6.png';
+
 
 const WatchAds = ({ toggleSidebar })=> {
     const [userStats, setUserStats] = useState(userInitialStats);
@@ -24,14 +31,8 @@ const WatchAds = ({ toggleSidebar })=> {
     ]);
 
     // Clean vector image links matching the exact categories in the mockup
-    const mockImages = {
-        1: <MonitorPlay size={40} className="text-primary" />,
-        2: <Flame size={40} className="text-success" />,
-        3: <Award size={40} className="text-warning" />,
-        4: <Calendar size={40} className="text-info" />,
-        5: <ShieldCheck size={40} className="text-primary" />,
-        6: <Gift size={40} className="text-danger" />
-    };
+   const mockImages = { 1: ad1, 2: ad2, 3: ad3, 4: ad4, 5: ad5, 6: ad6 };
+
 
     // 🚀 FIXED: Added an explicit execution lock to stop double reward triggers
     const handleWatchAd = (adId, rewardAmount, duration) => {
@@ -270,8 +271,12 @@ const WatchAds = ({ toggleSidebar })=> {
                 <div className={styles.adImageWrapper + " d-flex align-items-center justify-content-center"} style={{ backgroundColor: '#f1f5f9' }}>
                   <span className={styles.categoryBadge}>{ad.category}</span>
                   
-                  {/* Renders the vector icon directly on the screen */}
-                  {mockImages[ad.id]}
+                 {/* Renders the image correctly inside an image tag */}
+<img 
+  src={mockImages[ad.id]} 
+  alt={ad.title} 
+  style={{ width: '100%', height: '100%', objectFit: 'contain' }} 
+/>
                 </div>
                 
                 {/* COLUMN 2: Descriptive Info Stack (Title, Desc, Time, VEs) */}
@@ -441,6 +446,7 @@ const WatchAds = ({ toggleSidebar })=> {
         </div>
     );
 };
+// Made by Sanyam Madan
 
 export default WatchAds;
 
