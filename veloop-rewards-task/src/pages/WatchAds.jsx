@@ -4,7 +4,7 @@ import lifetimeImg from '../assets/lifetime-stat.png';
 import watchedImg from '../assets/watched-stat.png';
 import remainingImg from '../assets/remaining-stat.png';
 import heroGraphicImg from '../assets/hero-graphic.png';
-import { Award, Calendar, Eye, ShieldAlert, Play, CheckCircle, Loader2, Flame, Gift, ArrowRight, ShieldCheck, Bell,MonitorPlay } from 'lucide-react';
+import { Award, Calendar, Eye, ShieldAlert, Play, CheckCircle, Loader2, Flame, Gift, ArrowRight, ShieldCheck, Bell } from 'lucide-react';
 
 
 import { useState } from 'react';
