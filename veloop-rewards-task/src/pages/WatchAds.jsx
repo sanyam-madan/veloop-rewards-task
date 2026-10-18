@@ -121,7 +121,7 @@ const WatchAds = ({ toggleSidebar })=> {
 
           <div>
             <h2 className="fw-bold m-0 text-dark" style={{ letterSpacing: '-0.5px', fontSize: '1.5rem' }}>Watch Ads</h2>
-            <small className="text-muted d-none d-sm-inline">Watch ads and earn VEs</small>
+            <small className=" d-none d-sm-inline" style={{color:'rgb(160, 170, 179)' }}>Watch ads and earn VEs</small>
           </div>
         </div>
         
@@ -131,7 +131,7 @@ const WatchAds = ({ toggleSidebar })=> {
           </span>
           <button 
             className="btn p-2 rounded-circle border d-flex align-items-center justify-content-center bg-white text-muted"
-            style={{ width: '36px', height: '36px', borderColor: 'var(--border-light)' }}
+            style={{ width: '36px', height: '36px', borderColor: 'var(--border-light)', color:'rgb(160, 170, 179)'  }}
           >
             <Bell size={16} className="text-secondary" />
           </button>
@@ -151,7 +151,7 @@ const WatchAds = ({ toggleSidebar })=> {
 
                     <div className={styles.progressContainer}>
                         <div className="d-flex justify-content-between align-items-center mb-1 text-dark fs-6">
-                            <span className="fw-semibold text-muted small">Daily Earnings Progress</span>
+                            <span className=" text-muted fw-semibold  small" >Daily Earnings Progress</span>
                             <span className="fw-bold text-dark small">{userStats.todaysEarnings} / {userStats.dailyGoal} VEs</span>
                         </div>
                         <div className="progress bg-light rounded-pill" style={{ height: '6px' }}>
@@ -215,11 +215,11 @@ const WatchAds = ({ toggleSidebar })=> {
               
               {/* 2. RIGHT SIDE: Clean vertical text data column stacking label text, numbers, and stats */}
               <div className="d-flex flex-column justify-content-center">
-                <span className="text-muted fw-medium" style={{ fontSize: '0.82rem', marginBottom: '2px' }}>
+                <span className=" fw-medium" style={{ fontSize: '0.82rem', marginBottom: '2px' ,color:'rgb(160, 170, 179)' }}>
                   {stat.label}
                 </span>
                 <div className="d-flex align-items-baseline gap-2">
-                  <h4 className="fw-bold m-0 text-dark" style={{ fontSize: '1.05rem', letterSpacing: '-0.5px' }}>
+                  <h4 className="fw-bold m-0 " style={{ fontSize: '1.05rem', letterSpacing: '-0.5px',color:'rgb(201, 225, 250)'  }}>
                     {stat.value}
                   </h4>
                 </div>
@@ -241,7 +241,7 @@ const WatchAds = ({ toggleSidebar })=> {
                         <ShieldCheck size={20} className="text-success" />
                         <div>
                             <strong className="text-dark small d-block">Your VEs. Your Rewards.</strong>
-                            <span className="text-muted" style={{ fontSize: '0.78rem' }}>Earn VEs by watching ads. Convert them into real cash and withdraw to your linked bank account once you meet conditions.</span>
+                            <span className="hi" style={{ fontSize: '0.78rem',color:'rgb(160, 170, 179)'  }}>Earn VEs by watching ads. Convert them into real cash and withdraw to your linked bank account once you meet conditions.</span>
                         </div>
                     </div>
                     <button className="btn btn-sm btn-light border bg-white fw-bold px-3 py-1 text-dark" style={{ fontSize: '0.78rem' }}>Learn More</button>
@@ -277,10 +277,10 @@ const WatchAds = ({ toggleSidebar })=> {
                 {/* COLUMN 2: Descriptive Info Stack (Title, Desc, Time, VEs) */}
                 <div className="d-flex flex-column flex-grow-1" style={{ minWidth: 0 }}>
                   <h5 className={styles.adTitle + " text-truncate m-0"}>{ad.title}</h5>
-                  <p className={styles.adDesc + " text-muted text-clamp-2 my-1"}>{ad.description}</p>
+                  <p className={styles.adDesc + " text-clamp-2 my-1"} style={{color:'rgb(160, 170, 179)' }}>{ad.description}</p>
                   
                   <div className="d-flex justify-content-between align-items-center mt-auto" style={{ fontSize: '0.78rem' }}>
-                    <span className="text-muted">🕒 {ad.duration} sec</span>
+                    <span className="hi" style={{color:'rgb(160, 170, 179)' }}>🕒 {ad.duration} sec</span>
                     <span className={styles.rewardText}>+{ad.reward} VEs</span>
                   </div>
                   
@@ -295,7 +295,7 @@ const WatchAds = ({ toggleSidebar })=> {
                         display: 'inline-block' 
                       }}
                     ></span>
-                    <span className="text-muted">{isCompleted ? 'Completed' : '● Available'}</span>
+                    <span className="hi" style={{color:'rgb(160, 170, 179)' }}>{isCompleted ? 'Completed' : 'Available'}</span>
                   </div>
                 </div>
 
@@ -320,7 +320,7 @@ const WatchAds = ({ toggleSidebar })=> {
                     </>
                   ) : isCompleted ? (
                     <>
-                      <CheckCircle size={14} className="text-muted" />
+                      <CheckCircle size={14} className="hi" style={{color:'rgb(160, 170, 179)' }} />
                       <span>Completed</span>
                     </>
                   ) : (
@@ -348,7 +348,7 @@ const WatchAds = ({ toggleSidebar })=> {
                         </h6>
                         <span className="badge bg-danger bg-opacity-10 text-danger px-2 py-0.5 rounded">7 Days</span>
                     </div>
-                    <p className="text-muted small mb-3" style={{ fontSize: '0.78rem' }}>Keep it up! Watch ads daily to claim a reward.</p>
+                    <p className=" small mb-3" style={{ fontSize: '0.78rem', color:'rgb(160, 170, 179)'  }}>Keep it up! Watch ads daily to claim a reward.</p>
                     <div className={styles.streakGrid}>
                         {weekDays.map((day, idx) => {
                             const isToday = day.dayIndex === currentDayIndex;

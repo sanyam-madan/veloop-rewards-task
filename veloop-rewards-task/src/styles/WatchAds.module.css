@@ -398,7 +398,7 @@
 }
 
 .walletBtn {
-  background: #ffffff;
+  background: rgb(6, 30, 30);
   border: 1px solid var(--border-light);
   color: var(--text-main);
   padding: 0.5rem 1rem;
@@ -409,7 +409,7 @@
 }
 
 .walletBtn:hover {
-  background: #f8fafc;
+  background: rgb(41, 21, 21);
 }
 
 .footerContainer {

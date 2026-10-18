@@ -1,14 +1,15 @@
 /* src/index.css */
 :root {
   --bg-deep: #ffecf8;
-  --bg-card: #ffffff;
+  --bg-card: black;
   --bg-sidebar: #ffecf8; /*  FORCES SIDEBAR WHITE */
   --accent-purple: #7c3aed;
   --accent-gold: #f59e0b;
-  --text-main: #0f172a;
-  --text-muted: #64748b;
+  --text-main: WHITE;
+  --text-muted:rgb(160, 170, 179) ;
   --border-light:2px solid black;
 }
+
 
 * {
   margin: 0;
